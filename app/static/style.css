@@ -1,0 +1,32 @@
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+  background: #f4f5f7;
+  color: #1f2328;
+}
+.container { max-width: 760px; margin: 0 auto; padding: 24px 16px; }
+h1 { margin: 0 0 4px; }
+.stats { margin: 0 0 16px; color: #57606a; }
+.card {
+  display: flex; flex-wrap: wrap; gap: 8px;
+  background: #fff; border: 1px solid #d0d7de; border-radius: 8px;
+  padding: 12px; margin-bottom: 12px;
+}
+input, select, button { font: inherit; padding: 6px 10px; border-radius: 6px; border: 1px solid #d0d7de; }
+input { flex: 1 1 160px; }
+button { background: #1f6feb; color: #fff; border-color: #1f6feb; cursor: pointer; }
+button.secondary { background: #fff; color: #1f2328; border-color: #d0d7de; }
+button.danger { background: #fff; color: #cf222e; border-color: #cf222e; padding: 2px 8px; }
+.error { background: #ffebe9; color: #82071e; border: 1px solid #ff8182; border-radius: 6px; padding: 8px 12px; margin-bottom: 12px; }
+.task-list { list-style: none; padding: 0; margin: 0; }
+.task {
+  display: flex; align-items: center; gap: 10px;
+  background: #fff; border: 1px solid #d0d7de; border-radius: 8px;
+  padding: 10px 12px; margin-bottom: 8px;
+}
+.task.done .title { text-decoration: line-through; color: #8c959f; }
+.task .title { flex: 1; }
+.tag { font-size: 12px; background: #ddf4ff; color: #0969da; border-radius: 10px; padding: 1px 8px; margin-left: 4px; }
+.prio { font-size: 12px; color: #57606a; }
+.report { background: #fff; border: 1px solid #d0d7de; border-radius: 8px; padding: 12px; }

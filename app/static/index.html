@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>TaskBoard</title>
+  <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+  <main class="container">
+    <header>
+      <h1>TaskBoard</h1>
+      <p id="stats" class="stats">Carregando estatísticas…</p>
+    </header>
+
+    <form id="new-task" class="card">
+      <input name="title" placeholder="Nova tarefa…" autocomplete="off">
+      <select name="priority">
+        <option value="1">Baixa</option>
+        <option value="2" selected>Média</option>
+        <option value="3">Alta</option>
+      </select>
+      <input name="tags" placeholder="tags, separadas, por vírgula" autocomplete="off">
+      <button type="submit">Adicionar</button>
+    </form>
+
+    <section class="card toolbar">
+      <select id="filter-status">
+        <option value="">Todas</option>
+        <option value="pending">Pendentes</option>
+        <option value="done">Concluídas</option>
+      </select>
+      <input id="search" placeholder="Buscar…" autocomplete="off">
+      <button id="clear-done" type="button" class="secondary">Limpar concluídas</button>
+      <button id="report" type="button" class="secondary">Gerar relatório</button>
+    </section>
+
+    <div id="error" class="error" hidden></div>
+    <ul id="task-list" class="task-list"></ul>
+    <pre id="report-output" class="report" hidden></pre>
+  </main>
+  <script src="/static/app.js"></script>
+</body>
+</html>

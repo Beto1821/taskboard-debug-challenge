@@ -74,7 +74,7 @@ async function loadTasks() {
   if (els.search.value.trim()) params.set("q", els.search.value.trim());
 
   try {
-    const tasks = await api(`/api/task?${params}`);
+    const tasks = await api(`/api/tasks?${params}`);
     els.list.replaceChildren(...tasks.map(renderTask));
     clearError();
   } catch (err) {
@@ -122,7 +122,7 @@ async function createTask(event) {
 
 async function toggleTask(id) {
   try {
-    await api(`/api/tasks/${id}/toggle`, { method: "PUT" });
+    await api(`/api/tasks/${id}/toggle`, { method: "toggle" });
   } catch (err) {
     showError(err.message);
   }

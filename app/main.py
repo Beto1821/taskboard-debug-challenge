@@ -28,7 +28,7 @@ def home():
     return FileResponse(BASE_DIR / "static" / "index.html")
 
 
-@app.get("/api/task", response_model=list[Task])
+@app.get("/api/tasks", response_model=list[Task])
 def list_tasks(status: str | None = None, q: str | None = None):
     """Lista tarefas. Filtros opcionais: ?status=pending|done e ?q=texto."""
     return store.find(status=status, q=q)

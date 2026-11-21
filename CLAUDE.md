@@ -31,7 +31,7 @@ Este projeto é um simulado de teste técnico: a aplicação FastAPI tem 16 bugs
 Corrigido até agora:
 - `main.py`: import `TaskCreate`; diretório `static`; rota `/api/tasks/stats` movida antes de `/api/tasks/{task_id}`.
 - `main.py`: rotas de listar e criar usam `/api/task` (singular). **Conferir** contra os testes e o `app.js`: as outras rotas usam `/api/tasks`.
-- `storage.py`: divisão por zero em `stats()` (em andamento, validar com `pytest -k stats`).
+- `storage.py`: divisão por zero em `stats()` (resolvido, testes de stats passam).
 
 Último `pytest`: 8 falhas, 7 passando. Falhas restantes:
 - `test_criar_tarefa_retorna_201` e `test_titulo_em_branco_e_rejeitado` (status code e validação).
@@ -45,6 +45,12 @@ Pendências anotadas, ainda sem investigar:
 - `GET /api/report` é `async def` com `time.sleep(3)`: o que isso faz com o servidor inteiro?
 - Bugs de frontend (`app.js`): seguir o checklist "Página" do README (seção 3) no navegador.
 - A linha de ativação da venv do README foi editada para WSL; reverter se for entregar o teste original.
+
+## ONDE PARAMOS (retomar daqui)
+
+- Servidor sobe e a página carrega. Testes de `stats` passam (divisão por zero resolvida).
+- A pessoa vai continuar pela **seção 3 do README (Especificação)**: rotas da API, regras de negócio e checklist da página no navegador. Releia essa seção com ela antes de guiar o próximo bug.
+- Próxima ação: ela escolhe uma falha do `pytest` (lista acima) ou um item do checklist da página, e o Claude guia com perguntas.
 
 ## Próximo passo ao retomar
 

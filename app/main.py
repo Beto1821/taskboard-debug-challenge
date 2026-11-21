@@ -18,7 +18,7 @@ from app.storage import TaskStore
 BASE_DIR = Path(__file__).parent
 
 app = FastAPI(title="TaskBoard")
-app.mount("/static", StaticFiles(directory=BASE_DIR / "statics"), name="static")
+app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 
 store = TaskStore()
 
@@ -28,7 +28,7 @@ def home():
     return FileResponse(BASE_DIR / "static" / "index.html")
 
 
-@app.get("/api/tasks", response_model=list[Task])
+@app.get("/api/task", response_model=list[Task])
 def list_tasks(status: str | None = None, q: str | None = None):
     """Lista tarefas. Filtros opcionais: ?status=pending|done e ?q=texto."""
     return store.find(status=status, q=q)
@@ -39,17 +39,16 @@ def create_task(payload: TaskCreate):
     return store.add(**payload.model_dump(exclude_none=True))
 
 
+@app.get("/api/tasks/stats", response_model=Stats)
+def get_stats():
+    return store.stats()
+
 @app.get("/api/tasks/{task_id}", response_model=Task)
 def get_task(task_id: int):
     task = store.get(task_id)
     if task is None:
         return {"error": "Tarefa não encontrada"}
     return task
-
-
-@app.get("/api/tasks/stats", response_model=Stats)
-def get_stats():
-    return store.stats()
 
 
 @app.patch("/api/tasks/{task_id}/toggle", response_model=Task)

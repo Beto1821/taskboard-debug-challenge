@@ -3,7 +3,7 @@
 from pydantic import BaseModel, Field, field_validator
 
 
-class TaskIn(BaseModel):
+class TaskCreate(BaseModel):
     """Corpo da requisição para criar uma tarefa."""
 
     title: str

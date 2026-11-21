@@ -64,5 +64,5 @@ class TaskStore:
             "total": total,
             "done": done,
             "pending": total - done,
-            "percent_done": round(done / total * 100, 1),
+            "percent_done": round((done / total) * 100, 1) if total else 0.0,
         }

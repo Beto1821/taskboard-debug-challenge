@@ -14,7 +14,7 @@ class TaskCreate(BaseModel):
     @classmethod
     def title_not_blank(cls, value: str) -> str:
         if not value.strip():
-            ValueError("O título não pode ficar em branco")
+            raise ValueError("O título não pode ficar em branco")
         return value.strip()
 
 

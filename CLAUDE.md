@@ -28,30 +28,39 @@ Este projeto é um simulado de teste técnico: a aplicação FastAPI tem 16 bugs
 
 ## Progresso (tentativa-1)
 
-Corrigido até agora:
-- `main.py`: import `TaskCreate`; diretório `static`; rota `/api/tasks/stats` movida antes de `/api/tasks/{task_id}`.
-- `main.py`: rotas de listar e criar usam `/api/task` (singular). **Conferir** contra os testes e o `app.js`: as outras rotas usam `/api/tasks`.
-- `storage.py`: divisão por zero em `stats()` (resolvido, testes de stats passam).
+Corrigido até agora (commits em `origin/tentativa-1`):
+- `main.py`: import `TaskCreate`; diretório `static`; rota `/api/tasks/stats` antes de `/api/tasks/{task_id}`.
+- `main.py` + `app.js`: GET de listar agora `/api/tasks` (plural) nos dois lados (`f4a5f4f`).
+- `app.js`: toggle usa `PATCH`, igual ao servidor e aos testes (`4318a8d`).
+- `main.py`: `status_code=201` no POST de criar (`3313628`).
+- `models.py`: `raise ValueError(...)` no validador de título (`c1397d0`).
+- `storage.py`: divisão por zero em `stats()`.
+- `storage.py`: `tags=None` em `add` em vez de `tags=[]` (`c247cb2`).
 
-Último `pytest`: 8 falhas, 7 passando. Falhas restantes:
-- `test_criar_tarefa_retorna_201` e `test_titulo_em_branco_e_rejeitado` (status code e validação).
-- `test_tags_nao_vazam_entre_tarefas` (valor padrão mutável compartilhado).
-- `test_ids_continuam_unicos_apos_excluir` (cálculo do id).
-- `test_buscar_tarefa_inexistente_retorna_404` (`get_task` devolve 200 com `{"error": ...}`).
-- `test_filtrar_por_status`, `test_busca_ignora_maiusculas` (`TypeError: string indices`).
-- `test_limpar_concluidas_remove_todas`.
+Último `pytest`: 5 falhas, 10 passando. Falhas restantes:
+- `test_ids_continuam_unicos_apos_excluir` (`IDs repetidos: [2, 3, 3]`: cálculo do id).
+- `test_buscar_tarefa_inexistente_retorna_404` (`ResponseValidationError`: `get_task` devolve 200 com `{"error": ...}`).
+- `test_filtrar_por_status`, `test_busca_ignora_maiusculas` (`assert [] == [...]`: `find` em `storage.py` devolve lista vazia; a rota já funciona).
+- `test_limpar_concluidas_remove_todas` (removeu 2 em vez de 4).
+
+Lições da sessão (reforçar ao guiar):
+- Teste e README são a fonte da verdade; teste nunca muda (já houve edição de teste por engano).
+- Mensagem de erro mudou = avanço.
+- `/docs` mostra as rotas que o servidor *tem*; o bug é a diferença para o README.
+- Ler o `E` do pytest, ignorar `warnings summary` (`httpx2` é ruído). Servidor sem `--reload` roda código antigo.
+- `raise` lança erro em Python; `ValueError(...)` sozinho só cria o objeto.
+- Git: `git add <arquivos>` antes de `commit`; `git push origin tentativa-1`. Não commitar `tests/`.
 
 Pendências anotadas, ainda sem investigar:
 - `GET /api/report` é `async def` com `time.sleep(3)`: o que isso faz com o servidor inteiro?
-- Bugs de frontend (`app.js`): seguir o checklist "Página" do README (seção 3) no navegador.
+- Frontend: `undefined% feito` na página. Servidor devolve `percent_done` em `/api/tasks/stats`; conferir o nome que o `app.js` (linha ~88) lê. Depois seguir o checklist "Página" do README (seção 3).
 - A linha de ativação da venv do README foi editada para WSL; reverter se for entregar o teste original.
 
 ## ONDE PARAMOS (retomar daqui)
 
-- Servidor sobe e a página carrega. Testes de `stats` passam (divisão por zero resolvida).
-- A pessoa vai continuar pela **seção 3 do README (Especificação)**: rotas da API, regras de negócio e checklist da página no navegador. Releia essa seção com ela antes de guiar o próximo bug.
-- Próxima ação: ela escolhe uma falha do `pytest` (lista acima) ou um item do checklist da página, e o Claude guia com perguntas.
-
+- Backend: 10 de 15 testes passam. Próximo alvo sugerido: `find` em `app/storage.py` (resolve `filtrar` e `busca_ignora_maiusculas` juntos). Hipóteses já dadas: linha 33 usa `is` em vez de `==`; linha 15 `id = len(...) + 1` repete id após excluir.
+- Perguntas guia: com `status="done"`, qual comparação `find` faz? Bate com o valor que o `toggle` grava? A busca usa `lower()` nos dois lados?
+- Frontend: `undefined% feito` ainda aberto.
 ## Próximo passo ao retomar
 
 1. Rodar `python -m pytest -q` e escolher **uma** falha.

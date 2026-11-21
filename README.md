@@ -46,6 +46,10 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+> **Qual comando de ativação usar depende do sistema:**
+> - Windows + PowerShell: `.\.venv\Scripts\Activate.ps1`
+> - Linux / macOS / WSL: `source .venv/bin/activate` (usado na `tentativa-1`)
+>
 > Se o PowerShell bloquear o `Activate.ps1`, rode antes:
 > `Set-ExecutionPolicy -Scope CurrentUser RemoteSigned`
 

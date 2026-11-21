@@ -122,7 +122,7 @@ async function createTask(event) {
 
 async function toggleTask(id) {
   try {
-    await api(`/api/tasks/${id}/toggle`, { method: "toggle" });
+    await api(`/api/tasks/${id}/toggle`, { method: "PATCH" });
   } catch (err) {
     showError(err.message);
   }

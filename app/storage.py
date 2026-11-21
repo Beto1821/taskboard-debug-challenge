@@ -8,7 +8,9 @@ class TaskStore:
     def __init__(self) -> None:
         self._tasks: list[dict] = []
 
-    def add(self, title: str, priority: int = 2, tags=[]) -> dict:
+    def add(self, title: str, priority: int = 2, tags=None) -> dict:
+        if tags is None:
+            tags = []
         # Toda tarefa ganha automaticamente uma tag com a prioridade.
         tags.append(f"prio-{priority}")
         task = {

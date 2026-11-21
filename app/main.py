@@ -34,7 +34,7 @@ def list_tasks(status: str | None = None, q: str | None = None):
     return store.find(status=status, q=q)
 
 
-@app.post("/api/tasks", response_model=Task)
+@app.post("/api/tasks", response_model=Task, status_code=201)
 def create_task(payload: TaskCreate):
     return store.add(**payload.model_dump(exclude_none=True))
 

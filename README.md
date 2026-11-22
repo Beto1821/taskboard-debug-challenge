@@ -38,7 +38,15 @@ Abra esta pasta no VS Code (**File → Open Folder**) e, no terminal integrado (
 python -m venv .venv
 ```
 
+Windows + PowerShell:
+
 ```powershell
+.\.venv\Scripts\Activate.ps1
+```
+
+Linux / macOS / WSL:
+
+```bash
 source .venv/bin/activate
 ```
 

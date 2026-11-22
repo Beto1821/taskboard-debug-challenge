@@ -7,14 +7,16 @@ Não há banco de dados: tudo some quando o servidor reinicia.
 class TaskStore:
     def __init__(self) -> None:
         self._tasks: list[dict] = []
+        self._counter = 0
 
     def add(self, title: str, priority: int = 2, tags=None) -> dict:
         if tags is None:
             tags = []
+        self._counter += 1
         # Toda tarefa ganha automaticamente uma tag com a prioridade.
         tags.append(f"prio-{priority}")
         task = {
-            "id": len(self._tasks) + 1,
+            "id": self._counter,
             "title": title,
             "priority": priority,
             "tags": tags,

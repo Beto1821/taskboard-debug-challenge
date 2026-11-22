@@ -86,6 +86,23 @@ pytest -v
 Ou pela aba **Testing** (ícone de frasco) do VS Code. Também existe a configuração
 **"TaskBoard: pytest (debug)"** para parar em breakpoints durante os testes.
 
+#### Rodar só um teste
+
+```bash
+# pelo caminho completo (pega exatamente um)
+python -m pytest -q tests/test_api.py::test_criar_tarefa_retorna_201
+
+# pelo nome, com -k (pega todo teste cujo nome contém o texto)
+python -m pytest -q -k filtrar
+
+# só os que falharam na última execução
+python -m pytest -q --lf
+```
+
+Para ver os nomes disponíveis: `python -m pytest --collect-only -q`.
+Opções úteis: `-v` (nome de cada teste), `-s` (mostra `print`), `-x` (para na primeira falha).
+Guia completo, com a lista de todos os testes: [TESTES.md](TESTES.md).
+
 ---
 
 ## 2. Estrutura do projeto

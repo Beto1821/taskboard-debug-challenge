@@ -47,7 +47,7 @@ def get_stats():
 def get_task(task_id: int):
     task = store.get(task_id)
     if task is None:
-        return {"error": "Tarefa não encontrada"}
+        raise HTTPException(status_code=404, detail="Tarefa não encontrada")
     return task
 
 

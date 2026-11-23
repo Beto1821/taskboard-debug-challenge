@@ -34,7 +34,7 @@ class TaskStore:
     def find(self, status: str | None = None, q: str | None = None) -> list[dict]:
         result = self._tasks
         if status:
-            result = [t for t in result if t["status"] is status]
+            result = [t for t in result if t["status"] == status]
         if q:
             result = [t for t in result if q in t["title"]]
         return result
